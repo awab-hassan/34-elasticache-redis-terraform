@@ -6,21 +6,7 @@ A Python smoke-test script is included to validate the deployment with PING, str
 
 ## Architecture
 
-```
-Existing VPC
-   |
-   +-- Subnet group (2 private subnets across 2 AZs)
-   |
-   +-- Security group (port 6379 only)
-   |     |
-   |     +-- ingress from VPC CIDR
-   |     +-- ingress from admin IP /32
-   |     +-- ingress from self (same SG)
-   |
-   +-- ElastiCache cluster        (plain, 1 node, cache.t3.micro)
-   +-- ElastiCache replication    (AUTH + TLS in-transit + at-rest encryption)
-       group                       1 shard, cache.t3.micro
-```
+![Architecture Diagram](./architecture.png)`
 
 Both Redis resources share one parameter group (`redis-params`, family `redis7`) and one subnet group (`redis-subnet-group`).
 
